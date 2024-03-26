@@ -1,0 +1,40 @@
+export TERM=xterm-256color
+
+
+# GIT ALIASES
+alias add='git add .'
+alias com='git commit --allow-empty-message -m ""'
+alias push='git push -u origin main'
+alias pl="git pull origin main"
+
+# GIT FUNCTION LOL
+function acp() {
+    echo "=========== PREPARING TO ADD... ============="
+    git add .
+    echo "=========== FINISHED ADDING ============="
+    read -p "==== Enter your commit message boss ====: " commit_message
+    git commit -m "$commit_message"
+    echo "=========== COMMITED ============="
+
+    echo "=========== PREPARING TO PUSH ============="
+    git push origin HEAD
+    echo "=========== PUSHED WELLDONE BOSS ... ============="
+}
+
+
+# LAZY ALIASES
+alias d='clear'
+alias g="gcc *.c ; ./a.out"
+
+# CODE STYLE
+alias py="pycodestyle --first *.py"
+alias bt="betty *.c *.h"
+
+# CDS ALIASES
+alias home='cd /mnt/c/Users/adeye/Desktop/'
+alias down='cd /mnt/c/Users/adeye/Downloads/'
+alias alx='cd /mnt/c/Users/adeye/Desktop/MY_ALX_JOURNEY_BEGINS/'
+alias high="cd /mnt/c/Users/adeye/Desktop/MY_ALX_JOURNEY_BEGINS/alx-higher_level_programming"
+alias c="cd /mnt/c/Users/adeye/Desktop/WORKS/C_LEARNING"
+alias wk="cd /mnt/c/Users/adeye/Desktop/WORKS"
+alias y='python3 /mnt/c/Users/adeye/Desktop/PYTHON\ LEARNING/INTERNET/INTERNET_ARCHIVE/youtube.py'
