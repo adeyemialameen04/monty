@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 
 data_t *glob_data_ptr = NULL;
 

@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 
 void count_args(data_t *data, char *token);
 void alloc_args(data_t *data);

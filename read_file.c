@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 
 void read_file(char *argv[], data_t *data);
 /**

@@ -1,5 +1,5 @@
 
-#include "main.h"
+#include "monty.h"
 #define MAX_DIGITS 12 /* Maximum number of digits for a 32-bit integer (including sign) */
 
 /**

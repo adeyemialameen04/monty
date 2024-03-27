@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 
 ssize_t custom_getline(char **lineptr, size_t *n, FILE *stream);
 /**

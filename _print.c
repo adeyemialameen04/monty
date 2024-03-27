@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 
 /**
  * _print - Custom write function to print a string or char.
