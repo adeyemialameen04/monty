@@ -12,7 +12,7 @@ char *dup_cmd_str(char *cmd);
  * @delim: Delimeter.
  * Return: 0.
  */
-int _tokenize_line(data_t *data, char *delim)
+int _tokenize_line(data_t *data, const char *delim)
 {
 	char *cmd_cpy;
 	char *token;

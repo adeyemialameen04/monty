@@ -24,9 +24,15 @@ void (*get_op_function(char *str))(stack_t **stack, unsigned int line_number)
 
 void push(stack_t **stack, unsigned int line_number)
 {
-	if (data->argc != 2)
+	data_t *data_ptr = &data;
+
+	if (data_ptr->argc != 2)
 	{
+		printf("Not enoff arguments");
+		return;
 	}
+	
+	/* stack_t *new_node = */ 
 
 	printf("Push %d\n", line_number);
 }

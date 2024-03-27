@@ -1,8 +1,10 @@
 #include "main.h"
 
+data_t data;
+
 int _monty(int argc, char *argv[])
 {
-	data_t data = initialize_data_struct();
+	data = initialize_data_struct();
 
 	if (argc == 1)
 	{
