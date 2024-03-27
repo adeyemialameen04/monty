@@ -1,5 +1,5 @@
-#ifndef _MAIN_H_
-#define _MAIN_H_
+#ifndef _MONTY_H_
+#define _MONTY_H_
 
 #include <stdio.h>
 #include <unistd.h>
@@ -87,4 +87,4 @@ char *_strdup(char *str);
 char *itoa(int num, char *str);
 char *_strchr(char *s, char c);
 
-#endif /* #ifndef _MAIN_H_ */
+#endif /* #ifndef _MONTY_H_ */
