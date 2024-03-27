@@ -91,3 +91,15 @@ void add(stack_t **stack, unsigned int line_number)
 
 	(*stack)->n = sum;
 }
+
+/**
+ * nop - Nop does nothing.
+ * @stack: double pointer to the stack.
+ * @line_number: Line number.
+ * Return: none.
+ */
+void nop(stack_t **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
+}

@@ -84,6 +84,7 @@ bool is_empty(stack_t **stack);
 void swap(stack_t **stack, unsigned int line_number);
 int stack_list(stack_t **stack);
 void add(stack_t **stack, unsigned int line_number);
+void nop(stack_t **stack, unsigned int line_number);
 
 /*STRING FUNCTIONS*/
 int _atoi(char *s);
