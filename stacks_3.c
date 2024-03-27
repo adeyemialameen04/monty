@@ -23,7 +23,8 @@ void sub(stack_t **stack, unsigned int line_number)
 
 	number_one = (*stack)->n;
 	number_two = (*stack)->next->n;
-	res = abs(number_one - number_two);
+
+	res = number_two - number_one;
 
 	pop(stack, line_number);
 
