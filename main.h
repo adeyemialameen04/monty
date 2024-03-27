@@ -84,6 +84,7 @@ int _atoi(char *s);
 int _strcmp(char *s1, char *s2);
 int _strlen(char *s);
 char *_strdup(char *str);
+char *itoa(int num, char *str);
 char *_strchr(char *s, char c);
 
 #endif /* #ifndef _MAIN_H_ */

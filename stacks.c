@@ -45,7 +45,7 @@ void push(stack_t **stack, unsigned int line_number)
 	int value;
 	stack_t *new_node = NULL;
 
-	snprintf(str, sizeof(str), "%u", line_number);
+	itoa(line_number, str);
 
 	if (data_ptr->argc != 2)
 	{
@@ -127,7 +127,7 @@ void pint(stack_t **stack, unsigned int line_number)
 	char str[20];
 	int top_value;
 
-	snprintf(str, sizeof(str), "%u", line_number);
+	itoa(line_number, str);
 
 	if (*stack == NULL)
 	{

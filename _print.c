@@ -16,10 +16,11 @@ void _print(int fd, char *printval)
  * @fd: The file descriptor to print to.
  * @num: The integer to print.
  */
-void _print_number(int fd, int num)
-{
-	char buffer[20];
-	int length = snprintf(buffer, sizeof(buffer), "%d", num);
-
-	write(fd, buffer, length);
-}
+/**
+ * void _print_number(int fd, int num)
+ * {
+ *	char buffer[20];
+ *	int length = snprintf(buffer, sizeof(buffer), "%d", num);
+ *	write(fd, buffer, length);
+ *}
+ */

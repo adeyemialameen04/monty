@@ -1,5 +1,6 @@
 
 #include "main.h"
+#define MAX_DIGITS 12 /* Maximum number of digits for a 32-bit integer (including sign) */
 
 /**
  * _strlen - Calculate the length of a string
@@ -125,4 +126,42 @@ char *_strchr(char *s, char c)
 	}
 
 	return (NULL);
+}
+
+char *itoa(int num, char *str)
+{
+	char temp[MAX_DIGITS]; /* Temporary buffer to store the digits */
+	int i = 0, j = 0;
+
+	/* Handle the case of 0 separately */
+	if (num == 0)
+	{
+		str[0] = '0';
+		str[1] = '\0';
+		return str;
+	}
+
+	/* Handle negative numbers */
+	if (num < 0)
+	{
+		str[i++] = '-';
+		num = -num; /* Make the number positive for simplicity */
+	}
+
+	/* Extract digits from right to left */
+	while (num != 0)
+	{
+		temp[i++] = '0' + num % 10;
+		num /= 10;
+	}
+
+	/* Reverse the digits in temp and copy to str */
+	while (i > 0)
+	{
+		str[j++] = temp[--i];
+	}
+
+	str[j] = '\0'; /* Null-terminate the string */
+
+	return str;
 }
