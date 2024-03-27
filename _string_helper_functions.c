@@ -1,6 +1,6 @@
 
 #include "monty.h"
-#define MAX_DIGITS 12 /* Maximum number of digits for a 32-bit integer (including sign) */
+#define MAX_DIGITS 12
 
 /**
  * _strlen - Calculate the length of a string
@@ -106,28 +106,11 @@ char *_strdup(char *str)
 }
 
 /**
- * _strchr - Locates a character in a string.
- *
- * @s: A pointer to the string to be searched.
- * @c: The character to be located.
- *
- * Return: A pointer to the first occurrence of the
- * character @c in the string @s,
- *         or NULL if the character is not found.
+ * itoa - convert number to string.
+ * @num: Number to be converted.
+ * @str: String its going to save it to.
+ * Return: The string.
  */
-char *_strchr(char *s, char c)
-{
-	int i;
-
-	for (i = 0; s[i] >= '\0'; i++)
-	{
-		if (s[i] == c)
-			return (&s[i]);
-	}
-
-	return (NULL);
-}
-
 char *itoa(int num, char *str)
 {
 	char temp[MAX_DIGITS]; /* Temporary buffer to store the digits */
@@ -138,7 +121,7 @@ char *itoa(int num, char *str)
 	{
 		str[0] = '0';
 		str[1] = '\0';
-		return str;
+		return (str);
 	}
 
 	/* Handle negative numbers */
@@ -163,5 +146,5 @@ char *itoa(int num, char *str)
 
 	str[j] = '\0'; /* Null-terminate the string */
 
-	return str;
+	return (str);
 }

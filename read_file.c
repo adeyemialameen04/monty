@@ -58,8 +58,8 @@ void read_file(char *argv[], data_t *data)
 		else
 		{
 			char str[20];
-			itoa(data->line_num, str);
 
+			itoa(data->line_num, str);
 			_print(STDERR_FILENO, "L");
 			_print(STDERR_FILENO, str);
 			_print(STDERR_FILENO, ": unknown instruction ");
