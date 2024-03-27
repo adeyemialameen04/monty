@@ -20,3 +20,28 @@ void _free_argv(data_t *data)
 		data->argv = NULL;
 	}
 }
+
+/**
+ * _free_stack - Frees the elements in a stack.
+ * @stack: The stack.
+ * Return: None.
+ */
+void _free_stack(stack_t **stack)
+{
+	stack_t *curr = *stack;
+	stack_t *next;
+
+	if (*stack == NULL)
+	{
+		return;
+	}
+
+	while (curr != NULL)
+	{
+		next = curr->next;
+		free(curr);
+		curr = next;
+	}
+
+	*stack = NULL;
+}

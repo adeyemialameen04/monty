@@ -1,18 +1,29 @@
 #include "main.h"
 
-data_t data;
+data_t *glob_data_ptr = NULL;
 
+/**
+ * _monty - Baba func.
+ * @argc: Args count.
+ * @argv: Array of strings.
+ * Return:  exit status.
+ */
 int _monty(int argc, char *argv[])
 {
-	data = initialize_data_struct();
+	data_t data = initialize_data_struct();
+	stack_t *stack = NULL;
+
+	data.stack = &stack;
+	glob_data_ptr = &data;
 
 	if (argc == 1)
 	{
-		_print(STDERR_FILENO, "USAGE: monty file");
+		_print(STDERR_FILENO, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 
 	read_file(argv, &data);
+	_free_stack(&stack);
 
 	return (data.exit_status);
 }

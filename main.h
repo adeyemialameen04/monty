@@ -8,9 +8,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <limits.h>
-#include <ctype.h>
-#include <termios.h>
-#include <libgen.h>
+#include <stdio.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -61,7 +59,8 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-extern data_t data;
+extern data_t *glob_data_ptr;
+
 void push(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
@@ -70,12 +69,15 @@ void (*get_op_function(char *str))(stack_t **stack, unsigned int line_number);
 ssize_t custom_getline(char **lineptr, size_t *n, FILE *stream);
 
 void _print(int fd, char *printval);
+void _print_number(int fd, int num);
 void read_file(char *argv[], data_t *data);
 data_t initialize_data_struct(void);
 int _monty(int argc, char *argv[]);
 int _tokenize_line(data_t *data, const char *delim);
 char *_div_str(char *str, const char *delim);
 void _free_argv(data_t *data);
+void _free_stack(stack_t **stack);
+void pint(stack_t **stack, unsigned int line_number);
 
 /*STRING FUNCTIONS*/
 int _atoi(char *s);

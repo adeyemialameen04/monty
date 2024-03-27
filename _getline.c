@@ -1,5 +1,13 @@
 #include "main.h"
 
+ssize_t custom_getline(char **lineptr, size_t *n, FILE *stream);
+/**
+ * custom_getline - My custom getline.
+ * @lineptr: Pointer to be read into.
+ * @n: chars count.
+ * @stream: File stream to be read from.
+ * Return: n.
+ */
 ssize_t custom_getline(char **lineptr, size_t *n, FILE *stream)
 {
 	size_t pos = 0;

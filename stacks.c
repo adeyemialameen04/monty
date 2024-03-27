@@ -1,13 +1,22 @@
 #include "main.h"
+#include <stdio.h>
+#include <stdio.h>
+#include <stdio.h>
 
+/**
+ * get_op_function - get opcode function.
+ * @str: String to compare with.
+ * Return: None.
+ */
 void (*get_op_function(char *str))(stack_t **stack, unsigned int line_number)
 {
 	int i = 0;
 
 	instruction_t instructions[] = {
 		{"push", push},
-		{"pop", pop},
 		{"pall", pall},
+		{"pint", pint},
+		{"pop", pop},
 		{NULL, NULL}};
 
 	while (instructions[i].opcode != NULL)
@@ -22,27 +31,113 @@ void (*get_op_function(char *str))(stack_t **stack, unsigned int line_number)
 	return (NULL);
 }
 
+/**
+ * push - Push element onto the stack.
+ * @stack: double pointer to the stack.
+ * @line_number: Line number.
+ * Return: none.
+ */
 void push(stack_t **stack, unsigned int line_number)
 {
-	data_t *data_ptr = &data;
+	data_t *data_ptr = glob_data_ptr;
+	char str[20];
+	char *end_ptr;
+	int value;
+	stack_t *new_node = NULL;
+
+	snprintf(str, sizeof(str), "%u", line_number);
 
 	if (data_ptr->argc != 2)
 	{
-		printf("Not enoff arguments");
-		return;
+		_print(STDERR_FILENO, "L");
+		_print(STDERR_FILENO, str);
+		_print(STDERR_FILENO, ": usage: push integer\n");
+		exit(EXIT_FAILURE);
 	}
-	
-	/* stack_t *new_node = */ 
 
-	printf("Push %d\n", line_number);
+	value = strtol(data_ptr->argv[1], &end_ptr, 10);
+	if (end_ptr == data_ptr->argv[1] || *end_ptr != '\0')
+	{
+		_print(STDERR_FILENO, "L");
+		_print(STDERR_FILENO, str);
+		_print(STDERR_FILENO, ": usage: push integer\n");
+		exit(EXIT_FAILURE);
+	}
+
+	new_node = malloc(sizeof(stack_t));
+	if (new_node == NULL)
+	{
+		_print(STDERR_FILENO, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
+
+	new_node->n = value;
+	new_node->prev = NULL;
+	new_node->next = *stack;
+
+	if (*stack != NULL)
+	{
+		(*stack)->prev = new_node;
+	}
+
+	*stack = new_node;
 }
 
+/**
+ * pop - Pop element out of the stack.
+ * @stack: double pointer to the stack.
+ * @line_number: Line number.
+ * Return: none.
+ */
 void pop(stack_t **stack, unsigned int line_number)
 {
+	(void)stack;
+	(void)line_number;
+
 	printf("Pop %d\n", line_number);
 }
 
+/**
+ * pall - prints all the elements in a stack.
+ * @stack: double pointer to the stack.
+ * @line_number: Line number.
+ * Return: none.
+ */
 void pall(stack_t **stack, unsigned int line_number)
 {
-	printf("Pall %d\n", line_number);
+	stack_t *curr = *stack;
+	(void)line_number;
+
+	while (curr != NULL)
+	{
+		printf("%d\n", curr->n);
+		curr = curr->next;
+	}
+}
+
+/**
+ * pint - print the value of the first element in the stack.
+ * @stack: double pointer to the stack.
+ * @line_number: Line number.
+ * Return: none.
+ */
+void pint(stack_t **stack, unsigned int line_number)
+{
+
+	char str[20];
+	int top_value;
+
+	snprintf(str, sizeof(str), "%u", line_number);
+
+	if (*stack == NULL)
+	{
+		_print(STDERR_FILENO, "L");
+		_print(STDERR_FILENO, str);
+		_print(STDERR_FILENO, ": can't pint, stack empty\n");
+		exit(EXIT_FAILURE);
+	}
+
+	top_value = (*stack)->n;
+
+	printf("%d\n", top_value);
 }

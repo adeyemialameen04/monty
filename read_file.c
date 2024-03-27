@@ -1,10 +1,18 @@
 #include "main.h"
 
+void read_file(char *argv[], data_t *data);
+/**
+ * read_file -read and execute opcodes.
+ * @argv: array of strings.
+ * @data: My data struct.
+ * Return: None.
+ */
 void read_file(char *argv[], data_t *data)
 {
-	ssize_t read;
+	ssize_t read, i;
 	size_t n = 0;
 	FILE *fd = fopen(argv[1], "r");
+
 	data->line_num = 0;
 
 	if (fd == NULL)
@@ -18,11 +26,24 @@ void read_file(char *argv[], data_t *data)
 	while ((read = custom_getline(&data->cmd, &n, fd)) != -1)
 	{
 		void (*op_fn)(stack_t **stack, unsigned int line_number);
+		int isEmpty = 1;
 
-		if (read == 0 || (read == 1 && data->cmd[0] == '\n'))
+		if (read <= 1 || (read == 2 && data->cmd[0] == ' ' && data->cmd[1] == '\n'))
+			continue;
+
+		for (i = 0; i < read; i++)
+		{
+			if (data->cmd[i] != ' ' && data->cmd[i] != '\n')
+			{
+				isEmpty = 0;
+				break;
+			}
+		}
+		if (isEmpty)
 			continue;
 
 		(data->line_num)++;
+
 		_tokenize_line(data, " \n");
 
 		if (data->argv[0] == NULL)
@@ -34,6 +55,16 @@ void read_file(char *argv[], data_t *data)
 		{
 			op_fn(data->stack, data->line_num);
 		}
+		else
+		{
+			_print(STDERR_FILENO, "L");
+			_print_number(STDERR_FILENO, data->line_num);
+			_print(STDERR_FILENO, ": unknown instruction ");
+			_print(STDERR_FILENO, data->argv[0]);
+			_print(STDERR_FILENO, "\n");
+			exit(EXIT_FAILURE);
+		}
+
 		_free_argv(data);
 	}
 

@@ -13,6 +13,8 @@ data_t initialize_data_struct(void)
 	data.argv = NULL;
 	data.exit_status = 0;
 	data.stack = NULL;
+	data.argc = 0;
+	data.line_num = 0;
 
 	return (data);
 }
