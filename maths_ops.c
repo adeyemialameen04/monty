@@ -143,38 +143,31 @@ void mod(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * pchar - Prints the ascii representation of the topmost value.
+ * add - Add the first two elements in the stack.
  * @stack: double pointer to the stack.
  * @line_number: Line number.
  * Return: none.
  */
-void pchar(stack_t **stack, unsigned int line_number)
+void add(stack_t **stack, unsigned int line_number)
 {
-	int ascii_val;
 	char str[20];
+	int number_one, number_two, sum;
 
 	itoa(line_number, str);
 
-	if (is_empty(stack))
+	if (stack_list(stack) < 2)
 	{
 		_print(STDERR_FILENO, "L");
 		_print(STDERR_FILENO, str);
-		_print(STDERR_FILENO, ": can't pchar, stack empty\n");
+		_print(STDERR_FILENO, ": can't add, stack too short\n");
 		exit(EXIT_FAILURE);
 	}
 
-	ascii_val = (*stack)->n;
+	number_one = (*stack)->n;
+	number_two = (*stack)->next->n;
+	sum = number_one + number_two;
 
-	if (ascii_val >= 0 && ascii_val <= 127)
-	{
-		putchar(ascii_val);
-		putchar('\n');
-	}
-	else
-	{
-		_print(STDERR_FILENO, "L");
-		_print(STDERR_FILENO, str);
-		_print(STDERR_FILENO, ": can't pchar, value out of range\n");
-		exit(EXIT_FAILURE);
-	}
+	pop(stack, line_number);
+
+	(*stack)->n = sum;
 }
