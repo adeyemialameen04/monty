@@ -67,7 +67,6 @@ void add(stack_t **stack, unsigned int line_number)
 {
 	char str[20];
 	int number_one, number_two, sum;
-	stack_t *temp = NULL;
 
 	itoa(line_number, str);
 
@@ -79,15 +78,11 @@ void add(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	temp = *stack;
-
 	number_one = (*stack)->n;
 	number_two = (*stack)->next->n;
 	sum = number_one + number_two;
 
-	*stack = temp->next;
-
-	free(temp);
+	pop(stack, line_number);
 
 	(*stack)->n = sum;
 }
