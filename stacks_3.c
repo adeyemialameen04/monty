@@ -10,7 +10,6 @@ void sub(stack_t **stack, unsigned int line_number)
 {
 	char str[20];
 	int number_one, number_two, res;
-	stack_t *temp = NULL;
 
 	itoa(line_number, str);
 
@@ -18,19 +17,15 @@ void sub(stack_t **stack, unsigned int line_number)
 	{
 		_print(STDERR_FILENO, "L");
 		_print(STDERR_FILENO, str);
-		_print(STDERR_FILENO, ": can't add, stack too short\n");
+		_print(STDERR_FILENO, ": can't sub, stack too short\n");
 		exit(EXIT_FAILURE);
 	}
 
-	temp = *stack;
-
 	number_one = (*stack)->n;
 	number_two = (*stack)->next->n;
-	res = number_one - number_two;
+	res = abs(number_one - number_two);
 
-	*stack = temp->next;
-
-	free(temp);
+	pop(stack, line_number);
 
 	(*stack)->n = res;
 }

@@ -20,6 +20,7 @@ void (*get_op_function(char *str))(stack_t **stack, unsigned int line_number)
 		{"swap", swap},
 		{"add", add},
 		{"nop", nop},
+		{"sub", sub},
 		{NULL, NULL}};
 
 	while (instructions[i].opcode != NULL)
