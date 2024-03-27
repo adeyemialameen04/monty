@@ -63,13 +63,6 @@ void pstr(stack_t **stack, unsigned int line_number)
 		{
 			putchar(curr->n);
 		}
-		else
-		{
-			_print(STDERR_FILENO, "L");
-			_print(STDERR_FILENO, str);
-			_print(STDERR_FILENO, ": can't pchar, value out of range\n");
-			exit(EXIT_FAILURE);
-		}
 
 		curr = curr->next;
 	}
