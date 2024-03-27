@@ -91,10 +91,24 @@ void push(stack_t **stack, unsigned int line_number)
  */
 void pop(stack_t **stack, unsigned int line_number)
 {
-	(void)stack;
-	(void)line_number;
+	char str[20];
+	stack_t *temp = NULL;
 
-	printf("Pop %d\n", line_number);
+	itoa(line_number, str);
+
+	if (is_empty(stack))
+	{
+		_print(STDERR_FILENO, "L");
+		_print(STDERR_FILENO, str);
+		_print(STDERR_FILENO, ": can't pop an empty stack\n");
+		exit(EXIT_FAILURE);
+	}
+
+	temp = *stack;
+
+	*stack = temp->next;
+
+	free(temp);
 }
 
 /**
@@ -123,13 +137,12 @@ void pall(stack_t **stack, unsigned int line_number)
  */
 void pint(stack_t **stack, unsigned int line_number)
 {
-
 	char str[20];
 	int top_value;
 
 	itoa(line_number, str);
 
-	if (*stack == NULL)
+	if (is_empty(stack))
 	{
 		_print(STDERR_FILENO, "L");
 		_print(STDERR_FILENO, str);

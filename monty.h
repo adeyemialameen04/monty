@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -78,6 +79,8 @@ char *_div_str(char *str, const char *delim);
 void _free_argv(data_t *data);
 void _free_stack(stack_t **stack);
 void pint(stack_t **stack, unsigned int line_number);
+
+bool is_empty(stack_t **stack);
 
 /*STRING FUNCTIONS*/
 int _atoi(char *s);
