@@ -75,7 +75,7 @@ void add(stack_t **stack, unsigned int line_number)
 	{
 		_print(STDERR_FILENO, "L");
 		_print(STDERR_FILENO, str);
-		_print(STDERR_FILENO, ": can't swap, stack too short\n");
+		_print(STDERR_FILENO, ": can't add, stack too short\n");
 		exit(EXIT_FAILURE);
 	}
 
