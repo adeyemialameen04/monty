@@ -24,6 +24,7 @@ void (*get_op_function(char *str))(stack_t **stack, unsigned int line_number)
 		{"div", divide},
 		{"mul", mul},
 		{"mod", mod},
+		{"pchar", pchar},
 		{NULL, NULL}};
 
 	while (instructions[i].opcode != NULL)

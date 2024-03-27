@@ -1,4 +1,2 @@
-push -10
-push -2
-# sub
-pall
+push 100
+pchar
