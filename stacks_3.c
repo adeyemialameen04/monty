@@ -32,12 +32,12 @@ void sub(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * div - Divides the first two elements in the stack.
+ * divide - Divides the first two elements in the stack.
  * @stack: double pointer to the stack.
  * @line_number: Line number.
  * Return: none.
  */
-void div(stack_t **stack, unsigned int line_number)
+void divide(stack_t **stack, unsigned int line_number)
 {
 	char str[20];
 	int number_one, number_two, res;
