@@ -16,17 +16,15 @@ int _tokenize_line(data_t *data, const char *delim)
 {
 	char *cmd_cpy;
 	char *token;
-	/*char *comment;*/
+	char *comment;
 
 	data->cmd[strcspn(data->cmd, "\n")] = '\0';
 
-	/**
-	 * comment = strchr(data->cmd, '#');
-	 *if (comment && (comment == data->cmd || isspace(comment[-1])))
-	 *{
-	 * **comment = '\0';
-	 *}
-	 */
+	comment = strchr(data->cmd, '#');
+	if (comment && (comment == data->cmd || isspace(comment[-1])))
+	{
+		*comment = '\0';
+	}
 
 	cmd_cpy = dup_cmd_str(data->cmd);
 	if (cmd_cpy == NULL)
