@@ -174,7 +174,7 @@ void pchar(stack_t **stack, unsigned int line_number)
 	{
 		_print(STDERR_FILENO, "L");
 		_print(STDERR_FILENO, str);
-		_print(STDERR_FILENO, ": cant pchar, value out of range\n");
+		_print(STDERR_FILENO, ": can't pchar, value out of range\n");
 		exit(EXIT_FAILURE);
 	}
 }
