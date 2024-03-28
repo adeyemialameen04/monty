@@ -23,18 +23,15 @@ void pchar(stack_t **stack, unsigned int line_number)
 
 	ascii_val = (*stack)->n;
 
-	if (ascii_val >= 0 && ascii_val <= 127)
-	{
-		putchar(ascii_val);
-		putchar('\n');
-	}
-	else
+	if (ascii_val > 127 || ascii_val < 0)
 	{
 		_print(STDERR_FILENO, "L");
 		_print(STDERR_FILENO, str);
 		_print(STDERR_FILENO, ": can't pchar, value out of range\n");
 		exit(EXIT_FAILURE);
 	}
+	putchar(ascii_val);
+	putchar('\n');
 }
 
 /**
@@ -68,4 +65,28 @@ void pstr(stack_t **stack, unsigned int line_number)
 	}
 
 	putchar('\n');
+}
+
+/**
+ * rotl - rotate left, makes the top become the end and the second
+ *				top become the top.
+ * @stack: double pointer to the stack.
+ * @line_number: Line number.
+ * Return: none.
+ */
+void rotl(stack_t **stack, unsigned int line_number)
+{
+	(void)line_number;
+
+	if (*stack != NULL && (*stack)->next != NULL)
+	{
+		stack_t *top = *stack, *sec_top = (*stack)->next;
+
+		while (top->next != NULL)
+			top = top->next;
+
+		top->next = *stack;
+		(*stack)->next = NULL;
+		*stack = sec_top;
+	}
 }
