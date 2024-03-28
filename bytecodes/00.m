@@ -1,2 +1,1 @@
-push 127
-pchar
+pstr

@@ -55,6 +55,8 @@ void pchar(stack_t **stack, unsigned int line_number)
  */
 void pstr(stack_t **stack, unsigned int line_number)
 {
+	data_t *data_ptr = glob_data_ptr;
+	FILE *fd_ptr = glob_fd_ptr;
 	stack_t *curr = NULL;
 	int ascii_val;
 
@@ -63,7 +65,12 @@ void pstr(stack_t **stack, unsigned int line_number)
 	if (stack == NULL || is_empty(stack))
 	{
 		putchar('\n');
-		return;
+		_free_argv(data_ptr);
+		free(data_ptr->cmd);
+		data_ptr->cmd = NULL;
+		if (fd_ptr != NULL)
+			fclose(fd_ptr);
+		exit(EXIT_FAILURE);
 	}
 
 	curr = *stack;
