@@ -65,6 +65,10 @@ void read_file(char *argv[], data_t *data)
 			_print(STDERR_FILENO, ": unknown instruction ");
 			_print(STDERR_FILENO, data->argv[0]);
 			_print(STDERR_FILENO, "\n");
+			free(data->cmd);
+			data->cmd = NULL;
+			_free_argv(data);
+			fclose(fd);
 			exit(EXIT_FAILURE);
 		}
 
