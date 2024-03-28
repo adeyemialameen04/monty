@@ -9,7 +9,6 @@
 void pchar(stack_t **stack, unsigned int line_number)
 {
 	int val;
-	FILE *fd_ptr = glob_fd_ptr;
 
 	if (*stack == NULL || stack == NULL)
 	{
