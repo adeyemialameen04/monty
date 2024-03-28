@@ -8,36 +8,20 @@
  */
 void pchar(stack_t **stack, unsigned int line_number)
 {
-	int ascii_val;
-	char str[20];
+	int val;
+	FILE *fd_ptr = glob_fd_ptr;
 
-	itoa(line_number, str);
-
-	if (stack == NULL || is_empty(stack))
+	if (*stack == NULL || stack == NULL)
 	{
-		_print(STDERR_FILENO, "L");
-		_print(STDERR_FILENO, str);
-		_print(STDERR_FILENO, ": can't pchar, stack empty\n");
+		fprintf(stderr, "L%d: can't pchar, stack empty\n", line_number);
+		fclose(fd_ptr);
 		exit(EXIT_FAILURE);
 	}
-
-	ascii_val = (*stack)->n;
-
-	if (ascii_val > 127 || ascii_val < 0)
-	{
-		_print(STDERR_FILENO, "L");
-		_print(STDERR_FILENO, str);
-		_print(STDERR_FILENO, ": can't pchar, value out of range\n");
-		exit(EXIT_FAILURE);
-	}
-
-	if (!isprint(ascii_val))
-	{
-		exit(EXIT_FAILURE);
-	}
-
-	putchar(ascii_val);
-	putchar('\n');
+	val = (*stack)->n;
+	if (val >= 0 && val <= 127)
+		printf("%c\n", val);
+	else
+		fprintf(stderr, "L%d: can't pchar, value out of range\n", line_number);
 }
 
 /**
