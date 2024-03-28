@@ -33,13 +33,12 @@ void read_file(char *argv[], data_t *data)
 	{
 		void (*op_fn)(stack_t **stack, unsigned int line_number);
 		/* int isEmpty = 1;*/
+		(data->line_num)++;
 
 		if (read <= 1 || (read == 2 && data->cmd[0] == ' ' && data->cmd[1] == '\n'))
 			continue;
 
 		trim_whitespace(data->cmd);
-
-		(data->line_num)++;
 
 		_tokenize_line(data, " \n");
 

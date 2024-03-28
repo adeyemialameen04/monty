@@ -8,18 +8,44 @@
  */
 void pchar(stack_t **stack, unsigned int line_number)
 {
-	int val;
+	data_t *data_ptr = glob_data_ptr;
+	FILE *fd_ptr = glob_fd_ptr;
+	int ascii_val;
+	char str[20];
 
-	if (*stack == NULL || stack == NULL)
+	itoa(line_number, str);
+
+	if (stack == NULL || is_empty(stack))
 	{
-		fprintf(stderr, "L%d: can't pchar, stack empty\n", line_number);
+		_print(STDERR_FILENO, "L");
+		_print(STDERR_FILENO, str);
+		_print(STDERR_FILENO, ": can't pchar, stack empty\n");
+		_free_argv(data_ptr);
+		_free_stack(stack);
+		free(data_ptr->cmd);
+		data_ptr->cmd = NULL;
+		if (fd_ptr != NULL)
+			fclose(fd_ptr);
 		exit(EXIT_FAILURE);
 	}
-	val = (*stack)->n;
-	if (val >= 0 && val <= 127)
-		printf("%c\n", val);
-	else
-		fprintf(stderr, "L%d: can't pchar, value out of range\n", line_number);
+
+	ascii_val = (*stack)->n;
+
+	if (ascii_val > 127 || ascii_val < 0)
+	{
+		_print(STDERR_FILENO, "L");
+		_print(STDERR_FILENO, str);
+		_print(STDERR_FILENO, ": can't pchar, value out of range\n");
+		exit(EXIT_FAILURE);
+	}
+
+	if (!isprint(ascii_val))
+	{
+		exit(EXIT_FAILURE);
+	}
+
+	putchar(ascii_val);
+	putchar('\n');
 }
 
 /**
