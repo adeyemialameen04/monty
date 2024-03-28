@@ -44,20 +44,26 @@ void pchar(stack_t **stack, unsigned int line_number)
 void pstr(stack_t **stack, unsigned int line_number)
 {
 	stack_t *curr = NULL;
+	int ascii_val;
 
 	(void)line_number;
 
+	if (stack == NULL || is_empty(stack))
+	{
+		putchar('\n');
+		return;
+	}
+
 	curr = *stack;
 
-	while (curr)
+	while (curr != NULL && curr->n != 0 && isprint(curr->n))
 	{
-		if (curr->n > 127 || curr->n <= 0)
-			break;
-		printf("%c", curr->n);
+		ascii_val = curr->n;
+		putchar(ascii_val);
 		curr = curr->next;
 	}
 
-	printf("\n");
+	putchar('\n');
 }
 
 /**

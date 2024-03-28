@@ -1,5 +1,7 @@
 #include "monty.h"
 
+FILE *glob_fd_ptr = NULL;
+
 void read_file(char *argv[], data_t *data);
 /**
  * read_file -read and execute opcodes.
@@ -12,6 +14,8 @@ void read_file(char *argv[], data_t *data)
 	ssize_t read, i;
 	size_t n = 0;
 	FILE *fd = fopen(argv[1], "r");
+
+	glob_fd_ptr = fd;
 
 	data->line_num = 0;
 
