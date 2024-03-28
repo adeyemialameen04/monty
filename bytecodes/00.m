@@ -1,1 +1,3 @@
-push fsdg
+push 1
+pall
+pchar
