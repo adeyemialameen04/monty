@@ -14,7 +14,6 @@ void pchar(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL || stack == NULL)
 	{
 		fprintf(stderr, "L%d: can't pchar, stack empty\n", line_number);
-		fclose(fd_ptr);
 		exit(EXIT_FAILURE);
 	}
 	val = (*stack)->n;

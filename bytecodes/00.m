@@ -1,2 +1,2 @@
-#push 4445
-pall
+push 72
+pchar
