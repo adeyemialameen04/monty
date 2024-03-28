@@ -43,24 +43,26 @@ void pchar(stack_t **stack, unsigned int line_number)
 void pstr(stack_t **stack, unsigned int line_number)
 {
 	stack_t *curr = NULL;
-	char str[20];
+	int ascii_val;
 
-	itoa(line_number, str);
+	(void)line_number;
 
-	if (is_empty(stack))
+	if (is_empty(stack) || stack == NULL)
 	{
 		putchar('\n');
+		return;
 	}
 
 	curr = *stack;
 
-	while (curr != NULL && curr->n != 0)
+	while (curr != NULL)
 	{
-		if (curr->n >= 0 && curr->n <= 127)
-		{
-			putchar(curr->n);
-		}
+		ascii_val = curr->n;
 
+		if (ascii_val <= 0 || ascii_val > 127)
+			break;
+
+		putchar(curr->n);
 		curr = curr->next;
 	}
 
