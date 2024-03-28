@@ -43,8 +43,8 @@ void pchar(stack_t **stack, unsigned int line_number)
 			fclose(fd_ptr);
 		exit(EXIT_FAILURE);
 	}
-	putchar(ascii_val);
-	putchar('\n');
+
+	printf("%c\n", ascii_val);
 }
 
 #define STACK_EMPTY_ERROR "L%u: can't pstr, stack empty\n"
