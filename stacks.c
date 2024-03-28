@@ -59,7 +59,7 @@ void push(stack_t **stack, unsigned int line_number)
 
 	itoa(line_number, str);
 
-	if (data_ptr->argc != 2)
+	if (data_ptr->argc < 2)
 	{
 		_print(STDERR_FILENO, "L");
 		_print(STDERR_FILENO, str);

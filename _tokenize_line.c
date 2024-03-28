@@ -17,8 +17,22 @@ int _tokenize_line(data_t *data, const char *delim)
 	char *cmd_cpy;
 	char *token;
 	char *comment;
+	char *cmd_ptr;
+	char *dest;
+	char *src;
 
 	data->cmd[strcspn(data->cmd, "\n")] = '\0';
+	dest = data->cmd;
+
+	for (src = data->cmd; *src; ++src)
+	{
+		if (!isspace((unsigned char)*src) ||
+			(src > data->cmd && !isspace((unsigned char)*(src - 1))))
+		{
+			*dest++ = *src;
+		}
+	}
+	*dest = '\0';
 
 	comment = strchr(data->cmd, '#');
 	if (comment && (comment == data->cmd || isspace(comment[-1])))
@@ -33,9 +47,13 @@ int _tokenize_line(data_t *data, const char *delim)
 		exit(EXIT_FAILURE);
 	}
 
-	token = tokenize_command(cmd_cpy, delim);
+	cmd_ptr = cmd_cpy;
+	while ((token = strtok(cmd_ptr, delim)) != NULL)
+	{
+		count_args(data, token);
+		cmd_ptr = NULL;
+	}
 
-	count_args(data, token);
 	alloc_args(data);
 
 	free(cmd_cpy);
@@ -47,8 +65,12 @@ int _tokenize_line(data_t *data, const char *delim)
 		exit(EXIT_FAILURE);
 	}
 
-	token = tokenize_command(cmd_cpy, delim);
-	copy_args(data, token);
+	cmd_ptr = cmd_cpy;
+	while ((token = strtok(cmd_ptr, delim)) != NULL)
+	{
+		copy_args(data, token);
+		cmd_ptr = NULL;
+	}
 
 	free(cmd_cpy);
 
