@@ -55,7 +55,7 @@ void pstr(stack_t **stack, unsigned int line_number)
 
 	curr = *stack;
 
-	while (curr != NULL)
+	while (curr != NULL && curr->n != 0)
 	{
 		ascii_val = curr->n;
 
