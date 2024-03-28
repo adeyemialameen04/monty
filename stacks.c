@@ -53,6 +53,7 @@ void push(stack_t **stack, unsigned int line_number)
 	data_t *data_ptr = glob_data_ptr;
 	FILE *fd_ptr = glob_fd_ptr;
 	char str[20];
+	char *end_ptr;
 	int value;
 	stack_t *new_node = NULL;
 
@@ -72,9 +73,8 @@ void push(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	value = atoi(data_ptr->argv[1]);
-
-	if (value == 0 && data_ptr->argv[1][0] != '0')
+	value = strtol(data_ptr->argv[1], &end_ptr, 10);
+	if (end_ptr == data_ptr->argv[1] || *end_ptr != '\0')
 	{
 		_print(STDERR_FILENO, "L");
 		_print(STDERR_FILENO, str);
