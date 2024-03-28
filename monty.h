@@ -62,6 +62,7 @@ typedef struct instruction_s
 } instruction_t;
 
 extern data_t *glob_data_ptr;
+extern FILE *glob_fd_ptr;
 
 void push(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);

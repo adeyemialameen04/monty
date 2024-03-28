@@ -51,6 +51,7 @@ void (*get_op_function(char *str))(stack_t **stack, unsigned int line_number)
 void push(stack_t **stack, unsigned int line_number)
 {
 	data_t *data_ptr = glob_data_ptr;
+	FILE *fd_ptr = glob_fd_ptr;
 	char str[20];
 	char *end_ptr;
 	int value;
@@ -58,11 +59,17 @@ void push(stack_t **stack, unsigned int line_number)
 
 	itoa(line_number, str);
 
-	if (data_ptr->argc != 2)
+	if (data_ptr->argc < 2)
 	{
 		_print(STDERR_FILENO, "L");
 		_print(STDERR_FILENO, str);
 		_print(STDERR_FILENO, ": usage: push integer\n");
+		_free_argv(data_ptr);
+		_free_stack(stack);
+		free(data_ptr->cmd);
+		data_ptr->cmd = NULL;
+		if (fd_ptr != NULL)
+			fclose(fd_ptr);
 		exit(EXIT_FAILURE);
 	}
 
@@ -72,6 +79,12 @@ void push(stack_t **stack, unsigned int line_number)
 		_print(STDERR_FILENO, "L");
 		_print(STDERR_FILENO, str);
 		_print(STDERR_FILENO, ": usage: push integer\n");
+		_free_argv(data_ptr);
+		_free_stack(stack);
+		free(data_ptr->cmd);
+		data_ptr->cmd = NULL;
+		if (fd_ptr != NULL)
+			fclose(fd_ptr);
 		exit(EXIT_FAILURE);
 	}
 
