@@ -65,6 +65,7 @@ void push(stack_t **stack, unsigned int line_number)
 		_print(STDERR_FILENO, "L");
 		_print(STDERR_FILENO, str);
 		_print(STDERR_FILENO, ": usage: push integer\n");
+		_free_argv(data_ptr);
 		_free_stack(stack);
 		free(data_ptr->cmd);
 		data_ptr->cmd = NULL;
