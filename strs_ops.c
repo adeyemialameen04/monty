@@ -101,7 +101,7 @@ void rotr(stack_t **stack, unsigned int line_number)
 {
 	stack_t *curr;
 
-	if (is_empty(stack))
+	if (is_empty(stack) || (*stack)->next == NULL)
 		return;
 
 	curr = *stack;
