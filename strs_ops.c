@@ -16,12 +16,10 @@ void pchar(stack_t **stack, unsigned int line_number)
 	{
 		fprintf(stderr, "L%d: can't pchar, stack empty\n", line_number);
 		_free_argv(data_ptr);
-		_free_stack(stack);
 		free(data_ptr->cmd);
 		data_ptr->cmd = NULL;
 		if (fd_ptr != NULL)
 			fclose(fd_ptr);
-		fclose(fd_ptr);
 		exit(EXIT_FAILURE);
 	}
 	val = (*stack)->n;
