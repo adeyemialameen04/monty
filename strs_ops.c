@@ -90,3 +90,32 @@ void rotl(stack_t **stack, unsigned int line_number)
 		*stack = sec_top;
 	}
 }
+
+/**
+ * rotr - rotate right, makes the top become the bottom.
+ * @stack: double pointer to the stack.
+ * @line_number: Line number.
+ * Return: none.
+ */
+void rotr(stack_t **stack, unsigned int line_number)
+{
+	stack_t *curr;
+
+	if (is_empty(stack))
+		return;
+
+	curr = *stack;
+
+	(void)line_number;
+
+	while (curr->next != NULL)
+	{
+		curr = curr->next;
+	}
+
+	curr->prev->next = NULL;
+	curr->next = *stack;
+	curr->prev = NULL;
+	(*stack)->prev = curr;
+	*stack = curr;
+}
