@@ -30,9 +30,8 @@ void pchar(stack_t **stack, unsigned int line_number)
 
 	ascii_val = (*stack)->n;
 
-	if (ascii_val < 0 && ascii_val > 127)
+	if (!__isascii(ascii_val))
 	{
-
 		_print(STDERR_FILENO, "L");
 		_print(STDERR_FILENO, str);
 		_print(STDERR_FILENO, ": can't pchar, value out of range\n");
@@ -44,7 +43,6 @@ void pchar(stack_t **stack, unsigned int line_number)
 			fclose(fd_ptr);
 		exit(EXIT_FAILURE);
 	}
-
 	putchar(ascii_val);
 	putchar('\n');
 }
