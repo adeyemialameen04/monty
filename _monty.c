@@ -1,5 +1,6 @@
 #include "monty.h"
 
+int _monty(int argc, char *argv[]);
 data_t *glob_data_ptr = NULL;
 
 /**

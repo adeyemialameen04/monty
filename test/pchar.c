@@ -2,5 +2,5 @@
 
 void main(void)
 {
-	putchar(0);
+	putchar(127);
 }

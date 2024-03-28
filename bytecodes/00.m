@@ -1,2 +1,2 @@
-push 0
-pchar
+# push 5
+pall

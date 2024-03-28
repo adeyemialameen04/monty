@@ -122,3 +122,18 @@ void copy_args(data_t *data, char *token)
 }
 
 /* valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./monty bytecodes/00.m */
+
+
+
+		/**
+		 * for (i = 0; i < read; i++)
+		 *{
+		 *	if (data->cmd[i] != ' ' && data->cmd[i] != '\n')
+		 *	{
+		 *		isEmpty = 0;
+		 *		break;
+		 *	}
+		 *}
+		 *if (isEmpty)
+		 *	continue;
+		 */

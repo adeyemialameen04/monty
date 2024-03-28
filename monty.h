@@ -102,6 +102,6 @@ int _strcmp(char *s1, char *s2);
 int _strlen(char *s);
 char *_strdup(char *str);
 char *itoa(int num, char *str);
-char *_strchr(char *s, char c);
+void trim_whitespace(char *str);
 
 #endif /* #ifndef _MONTY_H_ */

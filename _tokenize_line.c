@@ -16,34 +16,15 @@ int _tokenize_line(data_t *data, const char *delim)
 {
 	char *cmd_cpy;
 	char *token;
-	char *comment;
 	char *cmd_ptr;
-	char *dest;
-	char *src;
+	/*FILE *fd_ptr = glob_fd_ptr;*/
 
 	data->cmd[strcspn(data->cmd, "\n")] = '\0';
-	dest = data->cmd;
-
-	for (src = data->cmd; *src; ++src)
-	{
-		if (!isspace((unsigned char)*src) ||
-			(src > data->cmd && !isspace((unsigned char)*(src - 1))))
-		{
-			*dest++ = *src;
-		}
-	}
-	*dest = '\0';
-
-	comment = strchr(data->cmd, '#');
-	if (comment && (comment == data->cmd || isspace(comment[-1])))
-	{
-		*comment = '\0';
-	}
 
 	cmd_cpy = dup_cmd_str(data->cmd);
 	if (cmd_cpy == NULL)
 	{
-		perror("_strdup failed");
+		_print(STDERR_FILENO, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -61,7 +42,8 @@ int _tokenize_line(data_t *data, const char *delim)
 	cmd_cpy = dup_cmd_str(data->cmd);
 	if (cmd_cpy == NULL)
 	{
-		perror("_strdup failed");
+		_print(STDERR_FILENO, "Error: malloc failed\n");
+		_free_argv(data);
 		exit(EXIT_FAILURE);
 	}
 
@@ -126,7 +108,8 @@ void alloc_args(data_t *data)
 
 	if (data->argv == NULL)
 	{
-		perror("malloc failed");
+		_print(STDERR_FILENO, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
 	}
 }
 

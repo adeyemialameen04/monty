@@ -31,6 +31,11 @@ void pchar(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
+	if (!isprint(ascii_val))
+	{
+		exit(EXIT_FAILURE);
+	}
+
 	putchar(ascii_val);
 	putchar('\n');
 }
