@@ -13,7 +13,7 @@ void pchar(stack_t **stack, unsigned int line_number)
 
 	itoa(line_number, str);
 
-	if (is_empty(stack))
+	if (stack == NULL || is_empty(stack))
 	{
 		_print(STDERR_FILENO, "L");
 		_print(STDERR_FILENO, str);
@@ -30,6 +30,7 @@ void pchar(stack_t **stack, unsigned int line_number)
 		_print(STDERR_FILENO, ": can't pchar, value out of range\n");
 		exit(EXIT_FAILURE);
 	}
+
 	putchar(ascii_val);
 	putchar('\n');
 }
@@ -43,26 +44,20 @@ void pchar(stack_t **stack, unsigned int line_number)
 void pstr(stack_t **stack, unsigned int line_number)
 {
 	stack_t *curr = NULL;
-	int ascii_val;
 
 	(void)line_number;
 
-	if (stack == NULL || is_empty(stack))
-	{
-		putchar('\n');
-		return;
-	}
-
 	curr = *stack;
 
-	while (curr != NULL && curr->n != 0 && isprint(curr->n))
+	while (curr)
 	{
-		ascii_val = curr->n;
-		putchar(ascii_val);
+		if (curr->n > 127 || curr->n <= 0)
+			break;
+		printf("%c", curr->n);
 		curr = curr->next;
 	}
 
-	putchar('\n');
+	printf("\n");
 }
 
 /**
