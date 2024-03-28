@@ -47,6 +47,8 @@ void pchar(stack_t **stack, unsigned int line_number)
 	putchar('\n');
 }
 
+#define STACK_EMPTY_ERROR "L%u: can't pstr, stack empty\n"
+#define VALUE_OUT_OF_RANGE_ERROR "L%u: can't pstr, value out of range\n"
 /**
  * pstr - Prints the ascii representation of the stack as a string.
  * @stack: double pointer to the stack.
@@ -55,30 +57,31 @@ void pchar(stack_t **stack, unsigned int line_number)
  */
 void pstr(stack_t **stack, unsigned int line_number)
 {
-	data_t *data_ptr = glob_data_ptr;
-	FILE *fd_ptr = glob_fd_ptr;
+
 	stack_t *curr = NULL;
-	int ascii_val;
 
 	(void)line_number;
 
 	if (stack == NULL || is_empty(stack))
 	{
-		putchar('\n');
-		_free_argv(data_ptr);
-		free(data_ptr->cmd);
-		data_ptr->cmd = NULL;
-		if (fd_ptr != NULL)
-			fclose(fd_ptr);
-		exit(EXIT_FAILURE);
+
+		fprintf(stderr, STACK_EMPTY_ERROR, line_number);
+		return;
 	}
 
 	curr = *stack;
 
-	while (curr != NULL && curr->n != 0 && isprint(curr->n))
+	while (curr != NULL && curr->n != 0)
 	{
-		ascii_val = curr->n;
-		putchar(ascii_val);
+		if (curr->n > 0 && curr->n <= 127)
+		{
+			putchar(curr->n);
+		}
+		else
+		{
+			break;
+		}
+
 		curr = curr->next;
 	}
 
