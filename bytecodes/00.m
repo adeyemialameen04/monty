@@ -1,6 +1,4 @@
-push 2
+push 1
+pall yare
 push 3
-push 4
-pall
-rotr
-pall
+pall dsa
