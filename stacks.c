@@ -40,6 +40,11 @@ void (*get_op_function(char *str))(stack_t **stack, unsigned int line_number)
 		i++;
 	}
 
+	if (str != NULL && strchr(str, '#') != NULL)
+	{
+		return (nop);
+	}
+
 	return (NULL);
 }
 
