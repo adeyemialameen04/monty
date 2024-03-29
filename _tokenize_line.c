@@ -104,6 +104,7 @@ void count_args(data_t *data, char *token)
  */
 void alloc_args(data_t *data)
 {
+
 	data->argv = malloc((data->argc + 1) * sizeof(char *));
 
 	if (data->argv == NULL)

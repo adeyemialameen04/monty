@@ -133,17 +133,23 @@ char *itoa(int num, char *str)
  */
 void trim_whitespace(char *str)
 {
-	char *dest;
+	char *start = str;
+	char *end = str + strlen(str) - 1;
 
-	while (*str != '\0' && isspace(*str))
+	while (isspace((unsigned char)*start))
+		start++;
+
+	if (*start == '\0')
 	{
-		str++;
+		*str = '\0';
+		return;
 	}
 
-	dest = str;
-	while (*str != '\0')
-	{
-		*dest++ = *str++;
-	}
-	*dest = '\0';
+	while (end >= start && isspace((unsigned char)*end))
+		end--;
+
+	*(end + 1) = '\0';
+
+	if (start != str)
+		memmove(str, start, end - start + 2);
 }

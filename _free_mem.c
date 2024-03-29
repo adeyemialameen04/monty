@@ -13,8 +13,11 @@ void _free_argv(data_t *data)
 	{
 		for (i = 0; data->argv[i] != NULL; i++)
 		{
-			free(data->argv[i]);
-			data->argv[i] = NULL;
+			if (data->argv[i] != NULL)
+			{
+				free(data->argv[i]);
+				data->argv[i] = NULL;
+			}
 		}
 		free(data->argv);
 		data->argv = NULL;
