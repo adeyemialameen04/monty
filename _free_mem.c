@@ -49,6 +49,12 @@ void _free_stack(stack_t **stack)
 	*stack = NULL;
 }
 
+/**
+ * cleanup - Clean dynamically allocated mem.
+ * @data: Data struct.
+ * @fs: free stack or not.
+ * Return: None.
+ */
 void cleanup(data_t *data, bool fs)
 {
 	_free_argv(data);
