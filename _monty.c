@@ -23,10 +23,13 @@ int _monty(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	if (strcmp(argv[1], argv[2]) == 0)
+	if (argv[1] != NULL && argv[2] != NULL)
 	{
-		_print(STDERR_FILENO, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
+		if (strcmp(argv[1], argv[2]) == 0)
+		{
+			_print(STDERR_FILENO, "USAGE: monty file\n");
+			exit(EXIT_FAILURE);
+		}
 	}
 
 	read_file(argv, &data);

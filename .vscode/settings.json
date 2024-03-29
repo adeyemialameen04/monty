@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"main.h": "c",
-		"monty.h": "c"
+		"monty.h": "c",
+		"cstdlib": "c"
 	}
 }
