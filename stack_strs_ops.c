@@ -58,8 +58,7 @@ void pstr(stack_t **stack, unsigned int line_number)
 
 	if (stack == NULL || is_empty(stack))
 	{
-
-		fprintf(stderr, STACK_EMPTY_ERROR, line_number);
+		putchar('\n');
 		return;
 	}
 
