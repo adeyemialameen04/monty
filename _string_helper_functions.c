@@ -57,25 +57,6 @@ int _atoi(char *s)
 }
 
 /**
- * _strcmp - Compares two strings lexicographically.
- * @s1: The first string.
- * @s2: The second string.
- *
- * Return: An integer less than, equal to, or greater than 0 if s1 is found,
- *         respectively, to be less than, to match, or be greater than s2.
- */
-int _strcmp(char *s1, char *s2)
-{
-	while (*s1 != '\0' && *s2 != '\0' && *s1 == *s2)
-	{
-		s1++;
-		s2++;
-	}
-
-	return (*s1 - *s2);
-}
-
-/**
  * _strdup - Duplicates a string in newly allocated memory.
  * @str: The input string to duplicate.
  *
@@ -113,10 +94,9 @@ char *_strdup(char *str)
  */
 char *itoa(int num, char *str)
 {
-	char temp[MAX_DIGITS]; /* Temporary buffer to store the digits */
+	char temp[MAX_DIGITS];
 	int i = 0, j = 0;
 
-	/* Handle the case of 0 separately */
 	if (num == 0)
 	{
 		str[0] = '0';
@@ -124,27 +104,46 @@ char *itoa(int num, char *str)
 		return (str);
 	}
 
-	/* Handle negative numbers */
 	if (num < 0)
 	{
 		str[i++] = '-';
-		num = -num; /* Make the number positive for simplicity */
+		num = -num;
 	}
 
-	/* Extract digits from right to left */
 	while (num != 0)
 	{
 		temp[i++] = '0' + num % 10;
 		num /= 10;
 	}
 
-	/* Reverse the digits in temp and copy to str */
 	while (i > 0)
 	{
 		str[j++] = temp[--i];
 	}
 
-	str[j] = '\0'; /* Null-terminate the string */
+	str[j] = '\0';
 
 	return (str);
+}
+
+/**
+ * trim_whitespace - Trim all whitespaces in a str.
+ * @str: The string to be trimmed.
+ * Return: None
+ */
+void trim_whitespace(char *str)
+{
+	char *dest;
+
+	while (*str != '\0' && isspace(*str))
+	{
+		str++;
+	}
+
+	dest = str;
+	while (*str != '\0')
+	{
+		*dest++ = *str++;
+	}
+	*dest = '\0';
 }

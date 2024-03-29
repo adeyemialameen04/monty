@@ -44,9 +44,7 @@ void swap(stack_t **stack, unsigned int line_number)
 
 	if (stack_list(stack) < 2)
 	{
-		_print(STDERR_FILENO, "L");
-		_print(STDERR_FILENO, str);
-		_print(STDERR_FILENO, ": can't swap, stack too short\n");
+		_print_errmsg_cant_do_op(str, ": can't swap, stack too short\n");
 		exit(EXIT_FAILURE);
 	}
 

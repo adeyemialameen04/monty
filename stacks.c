@@ -33,7 +33,7 @@ void (*get_op_function(char *str))(stack_t **stack, unsigned int line_number)
 
 	while (instructions[i].opcode != NULL)
 	{
-		if (str != NULL && _strcmp(instructions[i].opcode, str) == 0)
+		if (str != NULL && strcmp(instructions[i].opcode, str) == 0)
 		{
 			return (instructions[i].f);
 		}
@@ -62,13 +62,8 @@ void push(stack_t **stack, unsigned int line_number)
 
 	if (data_ptr->argc < 2)
 	{
-		_print(STDERR_FILENO, "L");
-		_print(STDERR_FILENO, str);
-		_print(STDERR_FILENO, ": usage: push integer\n");
-		_free_argv(data_ptr);
-		_free_stack(stack);
-		free(data_ptr->cmd);
-		data_ptr->cmd = NULL;
+		_print_errmsg_cant_do_op(str, ": usage: push integer\n");
+		cleanup(data_ptr, true);
 		if (fd_ptr != NULL)
 			fclose(fd_ptr);
 		exit(EXIT_FAILURE);
@@ -77,13 +72,8 @@ void push(stack_t **stack, unsigned int line_number)
 	value = strtol(data_ptr->argv[1], &end_ptr, 10);
 	if (end_ptr == data_ptr->argv[1] || *end_ptr != '\0')
 	{
-		_print(STDERR_FILENO, "L");
-		_print(STDERR_FILENO, str);
-		_print(STDERR_FILENO, ": usage: push integer\n");
-		_free_argv(data_ptr);
-		_free_stack(stack);
-		free(data_ptr->cmd);
-		data_ptr->cmd = NULL;
+		_print_errmsg_cant_do_op(str, ": usage: push integer\n");
+		cleanup(data_ptr, true);
 		if (fd_ptr != NULL)
 			fclose(fd_ptr);
 		exit(EXIT_FAILURE);
@@ -123,9 +113,7 @@ void pop(stack_t **stack, unsigned int line_number)
 
 	if (is_empty(stack))
 	{
-		_print(STDERR_FILENO, "L");
-		_print(STDERR_FILENO, str);
-		_print(STDERR_FILENO, ": can't pop an empty stack\n");
+		_print_errmsg_cant_do_op(str, ": can't pop an empty stack\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -169,9 +157,7 @@ void pint(stack_t **stack, unsigned int line_number)
 
 	if (is_empty(stack))
 	{
-		_print(STDERR_FILENO, "L");
-		_print(STDERR_FILENO, str);
-		_print(STDERR_FILENO, ": can't pint, stack empty\n");
+		_print_errmsg_cant_do_op(str, ": can't pint, stack empty\n");
 		exit(EXIT_FAILURE);
 	}
 

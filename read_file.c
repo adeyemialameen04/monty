@@ -23,16 +23,14 @@ void read_file(char *argv[], data_t *data)
 
 	if (fd == NULL)
 	{
-		_print(STDERR_FILENO, "Error: Can't open file ");
-		_print(STDERR_FILENO, argv[1]);
-		_print(STDERR_FILENO, "\n");
+		print_errmsg_cant_open_file(argv[1]);
 		exit(EXIT_FAILURE);
 	}
 
 	while ((read = custom_getline(&data->cmd, &n, fd)) != -1)
 	{
 		void (*op_fn)(stack_t **stack, unsigned int line_number);
-		/* int isEmpty = 1;*/
+
 		(data->line_num)++;
 
 		if (read <= 1 || (read == 2 && data->cmd[0] == ' ' && data->cmd[1] == '\n'))
@@ -50,14 +48,10 @@ void read_file(char *argv[], data_t *data)
 		}
 		else
 		{
-			char str[20];
+			char line_num_str[20];
 
-			itoa(data->line_num, str);
-			_print(STDERR_FILENO, "L");
-			_print(STDERR_FILENO, str);
-			_print(STDERR_FILENO, ": unknown instruction ");
-			_print(STDERR_FILENO, data->argv[0]);
-			_print(STDERR_FILENO, "\n");
+			itoa(data->line_num, line_num_str);
+			print_errmsg_invalid_opcode(line_num_str, data);
 			if (data->cmd != NULL)
 			{
 				free(data->cmd);
@@ -78,26 +72,4 @@ void read_file(char *argv[], data_t *data)
 	}
 
 	fclose(fd);
-}
-
-/**
- * trim_whitespace - Trim all whitespaces in a str.
- * @str: The string to be trimmed.
- * Return: None
- */
-void trim_whitespace(char *str)
-{
-	char *dest;
-
-	while (*str != '\0' && isspace(*str))
-	{
-		str++;
-	}
-
-	dest = str;
-	while (*str != '\0')
-	{
-		*dest++ = *str++;
-	}
-	*dest = '\0';
 }

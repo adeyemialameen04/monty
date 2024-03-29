@@ -45,3 +45,17 @@ void _free_stack(stack_t **stack)
 
 	*stack = NULL;
 }
+
+void cleanup(data_t *data, bool fs)
+{
+	_free_argv(data);
+
+	if (data->cmd != NULL)
+	{
+		free(data->cmd);
+		data->cmd = NULL;
+	}
+
+	if (fs == true)
+		_free_stack(data->stack);
+}

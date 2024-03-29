@@ -15,11 +15,11 @@ ssize_t custom_getline(char **lineptr, size_t *n, FILE *stream)
 
 	if (*lineptr == NULL || *n == 0)
 	{
-		*n = 128; /* Initial buffer size */
+		*n = 128;
 		*lineptr = malloc(*n);
 		if (*lineptr == NULL)
 		{
-			return (-1); /* Error allocating memory */
+			return (-1);
 		}
 	}
 
@@ -32,7 +32,7 @@ ssize_t custom_getline(char **lineptr, size_t *n, FILE *stream)
 
 			if (new_ptr == NULL)
 			{
-				return (-1); /* Error reallocating memory */
+				return (-1);
 			}
 			*lineptr = new_ptr;
 			*n = new_size;
@@ -46,10 +46,10 @@ ssize_t custom_getline(char **lineptr, size_t *n, FILE *stream)
 
 	if (pos == 0 || ferror(stream))
 	{
-		return (-1); /* Error reading from stream */
+		return (-1);
 	}
 
-	(*lineptr)[pos] = '\0'; /* Null-terminate the string */
+	(*lineptr)[pos] = '\0';
 
-	return (pos); /* Return the number of characters read */
+	return (pos);
 }

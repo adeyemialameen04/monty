@@ -15,9 +15,7 @@ void sub(stack_t **stack, unsigned int line_number)
 
 	if (stack_list(stack) < 2)
 	{
-		_print(STDERR_FILENO, "L");
-		_print(STDERR_FILENO, str);
-		_print(STDERR_FILENO, ": can't sub, stack too short\n");
+		_print_errmsg_cant_do_op(str, ": can't sub, stack too short\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -46,9 +44,7 @@ void divide(stack_t **stack, unsigned int line_number)
 
 	if (stack_list(stack) < 2)
 	{
-		_print(STDERR_FILENO, "L");
-		_print(STDERR_FILENO, str);
-		_print(STDERR_FILENO, ": can't div, stack too short\n");
+		_print_errmsg_cant_do_op(str, ": can't div, stack too short\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -56,9 +52,7 @@ void divide(stack_t **stack, unsigned int line_number)
 
 	if (number_one == 0)
 	{
-		_print(STDERR_FILENO, "L");
-		_print(STDERR_FILENO, str);
-		_print(STDERR_FILENO, ": division by zero\n");
+		_print_errmsg_cant_do_op(str, ": division by zero\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -86,9 +80,7 @@ void mul(stack_t **stack, unsigned int line_number)
 
 	if (stack_list(stack) < 2)
 	{
-		_print(STDERR_FILENO, "L");
-		_print(STDERR_FILENO, str);
-		_print(STDERR_FILENO, ": can't mul, stack too short\n");
+		_print_errmsg_cant_do_op(str, ": can't mul, stack too short\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -117,9 +109,7 @@ void mod(stack_t **stack, unsigned int line_number)
 
 	if (stack_list(stack) < 2)
 	{
-		_print(STDERR_FILENO, "L");
-		_print(STDERR_FILENO, str);
-		_print(STDERR_FILENO, ": can't mod, stack too short\n");
+		_print_errmsg_cant_do_op(str, ": can't mod, stack too short\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -127,9 +117,7 @@ void mod(stack_t **stack, unsigned int line_number)
 
 	if (number_one == 0)
 	{
-		_print(STDERR_FILENO, "L");
-		_print(STDERR_FILENO, str);
-		_print(STDERR_FILENO, ": division by zero\n");
+		_print_errmsg_cant_do_op(str, ": division by zero\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -157,9 +145,7 @@ void add(stack_t **stack, unsigned int line_number)
 
 	if (stack_list(stack) < 2)
 	{
-		_print(STDERR_FILENO, "L");
-		_print(STDERR_FILENO, str);
-		_print(STDERR_FILENO, ": can't add, stack too short\n");
+		_print_errmsg_cant_do_op(str, ": can't add, stack too short\n");
 		exit(EXIT_FAILURE);
 	}
 

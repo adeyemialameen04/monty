@@ -64,44 +64,58 @@ typedef struct instruction_s
 extern data_t *glob_data_ptr;
 extern FILE *glob_fd_ptr;
 
-void push(stack_t **stack, unsigned int line_number);
-void pop(stack_t **stack, unsigned int line_number);
-void pall(stack_t **stack, unsigned int line_number);
-void (*get_op_function(char *str))(stack_t **stack, unsigned int line_number);
+data_t initialize_data_struct(void);
 
+/* CUSTOM FUNCTIONS */
+char *_div_str(char *str, const char *delim);
 ssize_t custom_getline(char **lineptr, size_t *n, FILE *stream);
 
 void _print(int fd, char *printval);
-void _print_number(int fd, int num);
 void read_file(char *argv[], data_t *data);
-data_t initialize_data_struct(void);
 int _monty(int argc, char *argv[]);
 int _tokenize_line(data_t *data, const char *delim);
-char *_div_str(char *str, const char *delim);
-void _free_argv(data_t *data);
-void _free_stack(stack_t **stack);
-void pint(stack_t **stack, unsigned int line_number);
 
+/* STACK OPERATIONS */
+void (*get_op_function(char *str))(stack_t **stack, unsigned int line_number);
 bool is_empty(stack_t **stack);
+
+/* BASIC STACK OPERATIONS */
+void push(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
 int stack_list(stack_t **stack);
-void add(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
+
+/* MATHS STACK OPERATIONS */
+void add(stack_t **stack, unsigned int line_number);
 void sub(stack_t **stack, unsigned int line_number);
 void divide(stack_t **stack, unsigned int line_number);
 void mul(stack_t **stack, unsigned int line_number);
 void mod(stack_t **stack, unsigned int line_number);
+
+/* STRING STACK OPERATIONS */
 void pchar(stack_t **stack, unsigned int line_number);
 void pstr(stack_t **stack, unsigned int line_number);
 void rotl(stack_t **stack, unsigned int line_number);
 void rotr(stack_t **stack, unsigned int line_number);
 
-/*STRING FUNCTIONS*/
+/*STRING OPERATIONS*/
 int _atoi(char *s);
-int _strcmp(char *s1, char *s2);
 int _strlen(char *s);
 char *_strdup(char *str);
 char *itoa(int num, char *str);
 void trim_whitespace(char *str);
+
+/* FREEING MEMORY */
+void _free_argv(data_t *data);
+void _free_stack(stack_t **stack);
+void cleanup(data_t *data, bool fs);
+
+/* PRINTING ERRORS */
+void print_errmsg_invalid_opcode(char *str, data_t *data);
+void print_errmsg_cant_open_file(char *filename);
+void _print_errmsg_cant_do_op(char *str, char *err_cant);
 
 #endif /* #ifndef _MONTY_H_ */

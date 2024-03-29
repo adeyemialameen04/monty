@@ -20,9 +20,7 @@ void pchar(stack_t **stack, unsigned int line_number)
 		_print(STDERR_FILENO, "L");
 		_print(STDERR_FILENO, str);
 		_print(STDERR_FILENO, ": can't pchar, stack empty\n");
-		_free_argv(data_ptr);
-		free(data_ptr->cmd);
-		data_ptr->cmd = NULL;
+		cleanup(data_ptr, false);
 		if (fd_ptr != NULL)
 			fclose(fd_ptr);
 		exit(EXIT_FAILURE);
@@ -32,13 +30,9 @@ void pchar(stack_t **stack, unsigned int line_number)
 
 	if (!__isascii(ascii_val))
 	{
-		_print(STDERR_FILENO, "L");
-		_print(STDERR_FILENO, str);
-		_print(STDERR_FILENO, ": can't pchar, value out of range\n");
-		_free_argv(data_ptr);
-		free(data_ptr->cmd);
-		data_ptr->cmd = NULL;
-		_free_stack(stack);
+		_print_errmsg_cant_do_op(str,
+								 ": can't pchar, value out of range\n");
+		cleanup(data_ptr, true);
 		if (fd_ptr != NULL)
 			fclose(fd_ptr);
 		exit(EXIT_FAILURE);
