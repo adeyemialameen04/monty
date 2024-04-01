@@ -63,6 +63,7 @@ typedef struct instruction_s
 
 extern data_t *glob_data_ptr;
 extern FILE *glob_fd_ptr;
+extern int list_type;
 
 data_t initialize_data_struct(void);
 
@@ -87,6 +88,8 @@ void pint(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
 int stack_list(stack_t **stack);
 void nop(stack_t **stack, unsigned int line_number);
+void ds_queue(stack_t **stack, unsigned int line_number);
+void ds_stack(stack_t **stack, unsigned int line_number);
 
 /* MATHS STACK OPERATIONS */
 void add(stack_t **stack, unsigned int line_number);

@@ -2,6 +2,7 @@
 
 int _monty(int argc, char *argv[]);
 data_t *glob_data_ptr = NULL;
+int list_type = 0;
 
 /**
  * _monty - Baba func.

@@ -29,6 +29,8 @@ void (*get_op_function(char *str))(stack_t **stack, unsigned int line_number)
 		{"pstr", pstr},
 		{"rotl", rotl},
 		{"rotr", rotr},
+		{"queue", ds_queue},
+		{"stack", ds_stack},
 		{NULL, NULL}};
 
 	while (instructions[i].opcode != NULL)
@@ -92,15 +94,38 @@ void push(stack_t **stack, unsigned int line_number)
 	}
 
 	new_node->n = value;
-	new_node->prev = NULL;
-	new_node->next = *stack;
-
-	if (*stack != NULL)
+	if (list_type == 0)
 	{
-		(*stack)->prev = new_node;
-	}
+		new_node->prev = NULL;
+		new_node->next = *stack;
 
-	*stack = new_node;
+		if (*stack != NULL)
+		{
+			(*stack)->prev = new_node;
+		}
+
+		*stack = new_node;
+	}
+	else if (list_type == 1)
+	{
+		stack_t *curr = *stack;
+
+		if (curr == NULL)
+		{
+			*stack = new_node;
+		}
+		else
+		{
+			while (curr->next != NULL)
+			{
+				curr = curr->next;
+			}
+
+			curr->next = new_node;
+			new_node->prev = curr;
+			new_node->next = NULL;
+		}
+	}
 }
 
 /**
