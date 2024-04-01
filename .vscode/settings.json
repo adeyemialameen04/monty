@@ -2,6 +2,7 @@
 	"files.associations": {
 		"main.h": "c",
 		"monty.h": "c",
-		"cstdlib": "c"
+		"cstdlib": "c",
+		"compilation": "c"
 	}
 }
